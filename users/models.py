@@ -35,3 +35,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    class Meta:
+        abstract = True
+class Farmer(User):
+    Area = models.FloatField()
+    Pesticide =models.BooleanField()
+    Nutrients = models.CharField(max_length=200)
