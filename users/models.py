@@ -40,6 +40,7 @@ class Farmer(User):
     phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
     phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
     address = models.TextField(max_length=500)
+    is_farmer = models.BooleanField(default=True)
     
 
 class Shop(User):

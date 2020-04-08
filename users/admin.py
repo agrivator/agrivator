@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import UserCreationForm, UserChangeForm
-from .models import User, Farmer, Product
+from .models import User, Farmer, Shop, Customer
 
 
 class UserAdmin(UserAdmin):
@@ -52,6 +52,9 @@ class UserAdmin(UserAdmin):
     search_fields = ("email",)
     ordering = ("email",)
 
+admin.site.register(User)
 
-admin.site.register(Farmer, UserAdmin)
+admin.site.register(Farmer)
+admin.site.register(Shop)
+admin.site.register(Customer)
 
