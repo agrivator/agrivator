@@ -32,7 +32,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-
 class Farmer(User):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -58,4 +57,12 @@ class Customer(User):
     phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
     phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
     is_customer = models.BooleanField(default=True)
-
+    class Meta:
+        abstract = True
+        
+class Product(models.Model):
+    Name = models.CharField(max_length=100)
+    Cost = models.FloatField()
+    Pesticide = models.BooleanField()
+    Quantity = models.FloatField()
+  
