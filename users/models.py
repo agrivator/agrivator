@@ -37,16 +37,3 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 
-class Product(models.Model):
-    name = models.CharField(max_length=255,help_text="Product Name")
-    message = models.TextField(max_length=500)
-    amount = models.IntegerField(help_text="Enter amount in Rupees") #Field to be changed
-    qty = models.IntegerField(help_text="Enter Quantity in Kg") #Field to be changed
-    farmer = models.ForeignKey(Farmer,on_delete=models.CASCADE)
-
-
-class Farmer(User):
-    is_farmer = models.BooleanField(default=True)
-    produces = models.ManyToManyField(Product,related_name="produces")
-   
-
