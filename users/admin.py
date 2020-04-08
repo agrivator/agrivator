@@ -2,23 +2,24 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import UserCreationForm, UserChangeForm
-from .models import User
+from .models import User, Farmer, Product
 
 
 class UserAdmin(UserAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
-    model = User
+    model = Farmer
     list_display = (
         "first_name",
         "last_name",
         "email",
-        "is_staff",
+        "phone",
+        "age",
+        "is_farmer",
         "is_active",
     )
     list_filter = (
         "email",
-        "is_staff",
         "is_active",
     )
     fieldsets = (
@@ -31,7 +32,8 @@ class UserAdmin(UserAdmin):
                     "age",
                     "phone",
                     "email",
-                    "password",
+                    "is_farmer",
+
                 )
             },
         ),
@@ -45,11 +47,12 @@ class UserAdmin(UserAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
+                    "age",
                     "email",
                     "phone",
+                    "is_farmer",
                     "password1",
                     "password2",
-                    "is_staff",
                     "is_active",
                 ),
             },
@@ -59,6 +62,8 @@ class UserAdmin(UserAdmin):
     ordering = ("email",)
 
 
-admin.site.register(User, UserAdmin)
+admin.site.register(Farmer, UserAdmin)
 
 ("first_name", "last_name", "age", "phone", "email")
+
+admin.site.register(Product)
