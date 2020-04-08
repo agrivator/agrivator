@@ -10,11 +10,8 @@ class UserAdmin(UserAdmin):
     form = UserChangeForm
     model = Farmer
     list_display = (
-        "first_name",
-        "last_name",
+        
         "email",
-        "phone",
-        "age",
         "is_farmer",
         "is_active",
     )
@@ -27,9 +24,6 @@ class UserAdmin(UserAdmin):
             None,
             {
                 "fields": (
-                    "first_name",
-                    "last_name",
-                    "age",
                     "phone",
                     "email",
                     "is_farmer",
@@ -45,9 +39,6 @@ class UserAdmin(UserAdmin):
             {
                 "classes": ("wide",),
                 "fields": (
-                    "first_name",
-                    "last_name",
-                    "age",
                     "email",
                     "phone",
                     "is_farmer",
@@ -64,6 +55,3 @@ class UserAdmin(UserAdmin):
 
 admin.site.register(Farmer, UserAdmin)
 
-("first_name", "last_name", "age", "phone", "email")
-
-admin.site.register(Product)
