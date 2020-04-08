@@ -86,6 +86,7 @@ class ShopAdmin(UserAdmin):
                 "fields": (
                     "name",
                     "email",
+                    "shop_owner_name",
                     "address",
                     "phone_one",
                     "password1",
@@ -108,7 +109,7 @@ class CustomerAdmin(UserAdmin):
             None,
             {
                 "fields": (
-                    "name"
+                    "name",
                     "email",
                     "phone_one",
                     "phone_two",
@@ -127,7 +128,7 @@ class CustomerAdmin(UserAdmin):
                 "classes": ("wide",),
                 "fields": (
                     "name",
-                    "address"
+                    "address",
                     "email",
                     "phone_one",
                     "password1",
