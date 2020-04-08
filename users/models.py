@@ -49,6 +49,7 @@ class Shop(User):
     shop_owner_name = models.CharField(max_length=255)
     phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
     phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
+    is_shop = models.BooleanField(default=True)
 
 
 class Customer(User):
@@ -56,4 +57,5 @@ class Customer(User):
     address = models.TextField(max_length=500)
     phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
     phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
+    is_customer = models.BooleanField(default=True)
 

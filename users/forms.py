@@ -23,7 +23,7 @@ class ShopCreationForm(UserCreationForm):
 
 class ShopChangeForm(UserChangeForm):
     class Meta:
-        model = Farmer
+        model = Shop
         fields = ("email","name","shop_owner_name","phone_one","phone_two","address")
 
 #Customer Forms
