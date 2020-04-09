@@ -5,7 +5,7 @@ from .forms import ( FarmerCreationForm, FarmerChangeForm,
                     ShopCreationForm, ShopChangeForm, 
                     CustomerCreationForm, CustomerChangeForm )
 
-from .models import User, Farmer, Shop, Customer
+from .models import User, Farmer, Shop, Customer, Product
 
 #Farmer Admin
 class FarmerAdmin(UserAdmin):
@@ -145,3 +145,4 @@ admin.site.register(Farmer,FarmerAdmin)
 admin.site.register(Shop,ShopAdmin)
 admin.site.register(Customer,CustomerAdmin)
 
+admin.site.register(Product)

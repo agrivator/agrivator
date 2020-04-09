@@ -61,8 +61,9 @@ class Customer(User):
 
 
 class Product(models.Model):
-    Name = models.CharField(max_length=100)
-    Cost = models.FloatField()
-    Pesticide = models.BooleanField()
-    Quantity = models.FloatField()
+    name = models.CharField(max_length=100)
+    cost = models.FloatField()
+    quantity = models.FloatField()
+    organic = models.BooleanField()
+    farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE,null=True)
     
