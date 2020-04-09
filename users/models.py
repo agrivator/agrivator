@@ -59,3 +59,10 @@ class Customer(User):
     phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
     is_customer = models.BooleanField(default=True)
 
+
+class Product(models.Model):
+    Name = models.CharField(max_length=100)
+    Cost = models.FloatField()
+    Pesticide = models.BooleanField()
+    Quantity = models.FloatField()
+    
