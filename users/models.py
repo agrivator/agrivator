@@ -32,7 +32,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-
 class Farmer(User):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
@@ -66,4 +65,3 @@ class Product(models.Model):
     quantity = models.FloatField()
     organic = models.BooleanField()
     farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE,null=True)
-    
