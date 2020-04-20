@@ -5,10 +5,14 @@ from .serializers import *
 from .models import *
 from rest_framework.response import Response
 
-class UserViewset(viewsets.ModelViewSet):   # for user view.
+
+
+class FarmerViewset(viewsets.ModelViewSet):   # FarmerProfile Creation
     
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = FarmerProfile.objects.all()
+    serializer_class = FarmerProfileSerializer
+
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
 
@@ -18,10 +22,12 @@ class UserViewset(viewsets.ModelViewSet):   # for user view.
             serializer.save()
             return Response(serializer.data)
 
-class FarmerViewset(viewsets.ModelViewSet):   # for user view.
+class ShopViewset(viewsets.ModelViewSet):   # Shop Profile Creation
     
-    queryset = Farmer.objects.all()
-    serializer_class = FarmerSerializer
+    queryset = ShopProfile.objects.all()
+    serializer_class = ShopProfileSerializer
+
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
 
@@ -31,10 +37,11 @@ class FarmerViewset(viewsets.ModelViewSet):   # for user view.
             serializer.save()
             return Response(serializer.data)
 
-class ShopViewset(viewsets.ModelViewSet):   # for user view.
+class CustomerViewset(viewsets.ModelViewSet):   # Customer Profile Creation
     
-    queryset = Shop.objects.all()
-    serializer_class = ShopSerializer
+    queryset = CustomerProfile.objects.all()
+    serializer_class = CustomerProfileSerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
 
@@ -44,23 +51,11 @@ class ShopViewset(viewsets.ModelViewSet):   # for user view.
             serializer.save()
             return Response(serializer.data)
 
-class CustomerViewset(viewsets.ModelViewSet):   # for user view.
-    
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+class ProductViewset(viewsets.ModelViewSet):   # Product Creation only for farmer user
 
-    def perform_create(self, serializer):
-
-        #Save the post data when creating a new user.
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-
-class ProductViewset(viewsets.ModelViewSet):   # for user view.
-    
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
 

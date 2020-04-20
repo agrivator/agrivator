@@ -11,6 +11,12 @@ phone_number_regex = RegexValidator(
         code="invalid_mobile",
     )
 
+USER_CHOICES = [
+    ('Farmer','Farmer'),
+    ('Shop','Shop'),
+    ('Customer','Customer'),
+]
+
 """
 Currently Only super user gets to view admin dashboard
 Staff Users can login to admin but no permission to view anything
@@ -20,43 +26,38 @@ Non Staff users are the end users the farmers
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    age = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
+    phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
     email = models.EmailField(_("email address"), unique=True, primary_key=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
+    user_type = models.CharField(choices=USER_CHOICES,max_length=50)
 
     USERNAME_FIELD = "email"
+
+    REQUIRED_FIELDS = ['first_name','last_name','user_type','age']
 
     objects = CustomUserManager()
 
     def __str__(self):
         return self.email
 
-class Farmer(User):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
-    age = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
-    phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
-    phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
-    address = models.TextField(max_length=500)
-    is_farmer = models.BooleanField(default=True)
+class FarmerProfile(models.Model):
+    farm_address = models.TextField(max_length=500)
+    farm_phone = models.CharField(max_length=14, validators=[phone_number_regex])
     
 
-class Shop(User):
-    name = models.CharField(max_length=255)
-    address = models.TextField(max_length=500)
-    shop_owner_name = models.CharField(max_length=255)
-    phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
-    phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
-    is_shop = models.BooleanField(default=True)
+class ShopProfile(models.Model):
+    shop_name = models.CharField(max_length=255)
+    shop_owner_name = models.ForeignKey(User,on_delete=models.CASCADE)
+    shop_address = models.TextField(max_length=500)
+    shop_phone = models.CharField(max_length=14, validators=[phone_number_regex])
 
-
-class Customer(User):
-    name = models.CharField(max_length=255)
-    address = models.TextField(max_length=500)
-    phone_one = models.CharField(max_length=14, validators=[phone_number_regex])
-    phone_two = models.CharField(max_length=14, validators=[phone_number_regex],null=True, blank=True)
-    is_customer = models.BooleanField(default=True)
+class CustomerProfile(models.Model):
+    customer_address = models.TextField(max_length=500)
 
 
 class Product(models.Model):
@@ -64,4 +65,4 @@ class Product(models.Model):
     cost = models.FloatField()
     quantity = models.FloatField()
     organic = models.BooleanField()
-    farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE,null=True)
+    farmer = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
