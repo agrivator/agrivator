@@ -20,4 +20,6 @@ from users.urls import router
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('api/v0/', include(router.urls)),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/register/', include('rest_auth.registration.urls'))
 ]

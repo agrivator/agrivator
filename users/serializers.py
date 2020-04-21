@@ -2,32 +2,41 @@ from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.ModelSerializer):
+class FarmerProfileSerializer(serializers.ModelSerializer):
+
+    user = serializers.HiddenField(
+    default=serializers.CurrentUserDefault()
+)
     
     class Meta:
-        model   =   User
-        fields  =   ('__all__')
-
-
-class FarmerSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model   =  Farmer
+        model   =  FarmerProfile
         fields  =  ('__all__')
 
-class ShopSerializer(serializers.ModelSerializer):
+class ShopProfileSerializer(serializers.ModelSerializer):
+    
+    shop_owner_name = serializers.HiddenField(
+    default=serializers.CurrentUserDefault()
+)
     
     class Meta:
-        model   =  Shop
+        model   =  ShopProfile
         fields  =  ('__all__')
 
-class CustomerSerializer(serializers.ModelSerializer):
+class CustomerProfileSerializer(serializers.ModelSerializer):
+
+    user = serializers.HiddenField(
+    default=serializers.CurrentUserDefault()
+)
     
     class Meta:
-        model   =  Customer
+        model   =  CustomerProfile
         fields  =  ('__all__')
 
 class ProductSerializer(serializers.ModelSerializer):
+
+    farmer = serializers.HiddenField(
+    default=serializers.CurrentUserDefault()
+)
     
     class Meta:
         model   =  Product
