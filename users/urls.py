@@ -4,7 +4,6 @@ from rest_framework import routers
 
 
 router=routers.DefaultRouter()
-router.register(r'user', views.UserViewset)
 router.register(r'farmer', views.FarmerViewset)
 router.register(r'shop', views.ShopViewset)
 router.register(r'customer', views.CustomerViewset)
