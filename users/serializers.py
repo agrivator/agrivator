@@ -3,6 +3,10 @@ from .models import *
 
 
 class FarmerProfileSerializer(serializers.ModelSerializer):
+
+    user = serializers.HiddenField(
+    default=serializers.CurrentUserDefault()
+)
     
     class Meta:
         model   =  FarmerProfile
@@ -10,11 +14,19 @@ class FarmerProfileSerializer(serializers.ModelSerializer):
 
 class ShopProfileSerializer(serializers.ModelSerializer):
     
+    shop_owner_name = serializers.HiddenField(
+    default=serializers.CurrentUserDefault()
+)
+    
     class Meta:
         model   =  ShopProfile
         fields  =  ('__all__')
 
 class CustomerProfileSerializer(serializers.ModelSerializer):
+
+    user = serializers.HiddenField(
+    default=serializers.CurrentUserDefault()
+)
     
     class Meta:
         model   =  CustomerProfile
